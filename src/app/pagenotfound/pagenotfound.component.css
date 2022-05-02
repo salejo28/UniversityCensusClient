@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.content_not_found {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.content_not_found h3 {
+  font-size: 25px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.btn_back {
+  background: #ff9400;
+  color: #fff;
+}

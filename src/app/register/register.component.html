@@ -1,0 +1,56 @@
+<div class="container-register">
+  <div class="card-register">
+    <div class="header-card">
+      <h4>Regiter</h4>
+      <ng-lottie [options]="options" width="100px"></ng-lottie>
+    </div>
+    <form class="form-register">
+      <div class="content-form">
+        <mat-form-field class="form-register-input">
+          <mat-label>First Name</mat-label>
+          <input type="text" matInput />
+        </mat-form-field>
+        <mat-form-field class="form-register-input">
+          <mat-label>Middle Name</mat-label>
+          <input type="text" matInput />
+        </mat-form-field>
+        <mat-form-field class="form-register-input">
+          <mat-label>Surname</mat-label>
+          <input type="text" matInput />
+        </mat-form-field>
+        <mat-form-field class="form-register-input">
+          <mat-label>Last Name</mat-label>
+          <input type="text" matInput />
+        </mat-form-field>
+        <mat-form-field class="form-register-input">
+          <mat-label>Tipo de Documento</mat-label>
+          <mat-select>
+            <mat-option
+              *ngFor="let typeIdentification of typesOfIdentifications"
+              value="{{ typeIdentification.value }}"
+              >{{ typeIdentification.value }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form-register-input">
+          <mat-label>Número de Documento</mat-label>
+          <input type="text" matInput />
+        </mat-form-field>
+        <mat-form-field class="form-register-input">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput />
+        </mat-form-field>
+        <mat-form-field class="form-register-input">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput />
+        </mat-form-field>
+      </div>
+      <div class="content-link">
+        <a routerLink="/">You have account?</a>
+      </div>
+      <button mat-raised-button color="primary" class="form-register-button">
+        Register
+      </button>
+    </form>
+  </div>
+</div>

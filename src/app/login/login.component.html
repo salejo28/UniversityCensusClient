@@ -1,0 +1,24 @@
+<div class="container-login">
+  <div class="card-login">
+    <div class="header-card">
+      <h4>Login</h4>
+      <ng-lottie [options]="options" width="100px"></ng-lottie>
+    </div>
+    <form class="form-login">
+      <mat-form-field class="form-login-input">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput />
+      </mat-form-field>
+      <mat-form-field class="form-login-input">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput />
+      </mat-form-field>
+      <div class="content-link">
+        <a routerLink="register">You haven't account?</a>
+      </div>
+      <button mat-raised-button color="primary" class="form-login-button">
+        Login
+      </button>
+    </form>
+  </div>
+</div>
