@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'environments/environment';
+import { DataLoginUI } from 'types';
 
 @Injectable({
   providedIn: 'root',
@@ -18,5 +19,9 @@ export class AuthService {
 
   getTypesIdentification() {
     return this.http.get(`${this.endpoint}/typeIds/`, this.options);
+  }
+
+  login(data: DataLoginUI) {
+    return this.http.post(`${this.endpoint}/auth/login`, data);
   }
 }

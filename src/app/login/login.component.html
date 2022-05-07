@@ -12,22 +12,32 @@
       [formGroup]="loginForm"
       (ngSubmit)="onSubmit($event)"
     >
+      <!-- Email -->
       <mat-form-field class="form-login-input">
-        <mat-label>Email</mat-label>
+        <mat-label>Correo Eléctronico</mat-label>
         <input type="email" matInput formControlName="email" />
         <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">
-          Please enter a valid email address
+          Por favor ingresa una dirección de correo valida
         </mat-error>
         <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">
-          Email is <strong>required</strong>
+          El correo es <strong>requerido</strong>
         </mat-error>
       </mat-form-field>
+      <!-- Password -->
       <mat-form-field class="form-login-input">
-        <mat-label>Password</mat-label>
+        <mat-label>Contraseña</mat-label>
         <input type="password" matInput formControlName="password" />
+        <mat-error *ngIf="loginForm.get('password')?.errors?.['required']">
+          La contraseña es <strong>requerida</strong>
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('password')?.errors?.['minlength']">
+          La contraseña debe tener al menos
+          {{loginForm.get('password')?.errors?.['minlength'].requiredLength}}
+          carácteres
+        </mat-error>
       </mat-form-field>
       <div class="content-link">
-        <a routerLink="register">You haven't account?</a>
+        <a routerLink="register">¿No tienes cuenta?</a>
       </div>
       <button mat-raised-button color="primary" class="form-login-button">
         Login
