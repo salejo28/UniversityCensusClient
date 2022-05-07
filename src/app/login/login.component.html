@@ -1,17 +1,30 @@
 <div class="container-login">
+  <div class="content-img">
+    <img [src]="img" alt="Pet principal login" />
+  </div>
   <div class="card-login">
     <div class="header-card">
       <h4>Login</h4>
       <ng-lottie [options]="options" width="100px"></ng-lottie>
     </div>
-    <form class="form-login">
+    <form
+      class="form-login"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit($event)"
+    >
       <mat-form-field class="form-login-input">
         <mat-label>Email</mat-label>
-        <input type="email" matInput />
+        <input type="email" matInput formControlName="email" />
+        <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">
+          Email is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="form-login-input">
         <mat-label>Password</mat-label>
-        <input type="password" matInput />
+        <input type="password" matInput formControlName="password" />
       </mat-form-field>
       <div class="content-link">
         <a routerLink="register">You haven't account?</a>

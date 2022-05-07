@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 
@@ -34,6 +35,7 @@ export function playerFactory() {
     MatInputModule,
     MatSelectModule,
     LottieModule.forRoot({ player: playerFactory }),
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

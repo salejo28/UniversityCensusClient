@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 })
 export class PagenotfoundComponent implements OnInit {
   options: AnimationOptions = {
-    path: '/assets/notfound.json',
+    path: '/assets/animations/notfound.json',
   };
 
   constructor(private location: Location) {}

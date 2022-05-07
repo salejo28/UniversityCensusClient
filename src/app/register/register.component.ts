@@ -12,8 +12,9 @@ import { TypeOfIdentification } from 'types';
 export class RegisterComponent implements OnInit {
   typesOfIdentifications: TypeOfIdentification[] = [];
   options: AnimationOptions = {
-    path: '/assets/principal.json',
+    path: '/assets/animations/principal.json',
   };
+  img: string = '/assets/img/petSecondary.jpeg';
 
   constructor(private service: AuthService) {}
 
