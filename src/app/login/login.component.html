@@ -15,7 +15,12 @@
       <!-- Email -->
       <mat-form-field class="form-login-input">
         <mat-label>Correo Eléctronico</mat-label>
-        <input type="email" matInput formControlName="email" />
+        <input
+          type="email"
+          matInput
+          formControlName="email"
+          autocomplete="off"
+        />
         <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">
           Por favor ingresa una dirección de correo valida
         </mat-error>
@@ -40,7 +45,7 @@
         <a routerLink="register">¿No tienes cuenta?</a>
       </div>
       <button mat-raised-button color="primary" class="form-login-button">
-        Login
+        Ingresar
       </button>
     </form>
   </div>

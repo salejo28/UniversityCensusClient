@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AnimationOptions } from 'ngx-lottie';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+
+import { AuthService } from 'services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -21,12 +25,40 @@ export class LoginComponent implements OnInit {
     ]),
   });
 
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const signin = localStorage.getItem('signin');
+    if (signin === 'true') {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   onSubmit(e: Event) {
     e.preventDefault();
-    console.log(this.loginForm);
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (response: any) => {
+        localStorage.setItem('signin', response.success);
+        this.authService.setLoggedIn = true;
+      },
+      error: (err) => {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          timer: 4000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+        Toast.fire({
+          title: err.error.error,
+          icon: 'error',
+        });
+      },
+      complete: () => this.router.navigate(['/dashboard']),
+    });
   }
 }

@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+    (click)="toggleSideNav()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span>Censo de Animales</span>
+  <span class="spacer"></span>
+  <img
+    class="img-user"
+    [src]="
+      user?.imgUri ??
+      'https://ui-avatars.com/api/?name=' +
+        user?.firstName +
+        ' ' +
+        user?.surname +
+        '&background=ff40b1&color=fff'
+    "
+    alt="img user"
+  />
+</mat-toolbar>

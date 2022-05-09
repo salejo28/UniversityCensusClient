@@ -1,0 +1,89 @@
+.container-sidenav {
+  width: 100%;
+  height: 100vh;
+}
+
+.side-nav {
+  width: 80%;
+}
+
+.side-nav-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 10px;
+}
+
+/* Side nav header */
+.side-nav-header {
+  width: 100%;
+}
+
+.side-nav-header .side-nav-header-user {
+  display: flex;
+  align-items: center;
+}
+
+.user-info {
+  margin-left: 30px;
+}
+
+.user-info h3 {
+  margin: 0;
+}
+
+.img-user {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+}
+
+.side-nav-logo {
+  width: 100%;
+  object-fit: cover;
+}
+
+.spacer {
+  margin: 10px 0;
+  height: 2px;
+  background: #ccc;
+}
+
+/* Content Routes Sidenav */
+.content-logout {
+  width: 92%;
+  position: absolute;
+  bottom: 20px;
+}
+
+.route-item {
+  display: flex;
+  background: #ff40b1;
+  color: #fff;
+  align-items: center;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.route-item span {
+  margin-left: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .side-nav {
+    width: 300px;
+  }
+}
+
+.container {
+  padding: 10px;
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    padding: 40px 90px;
+  }
+}

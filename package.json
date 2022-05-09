@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --open",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -23,6 +23,7 @@
     "lottie-web": "^5.9.4",
     "ngx-lottie": "^8.2.0",
     "rxjs": "~7.5.0",
+    "sweetalert2": "^11.4.11",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

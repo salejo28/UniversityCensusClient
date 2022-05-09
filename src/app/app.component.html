@@ -1,1 +1,54 @@
-<router-outlet></router-outlet>
+<mat-drawer-container
+  class="container-sidenav"
+  [hasBackdrop]="true"
+  (backdropClick)="backdropClick()"
+>
+  <mat-drawer [opened]="showSideNav | async" mode="over" class="side-nav">
+    <div class="side-nav-content">
+      <div class="side-nav-header">
+        <!-- <img
+        src="assets/img/LogoCensoTransparent.png"
+        class="side-nav-logo"
+        alt="logo img"
+      /> -->
+        <div class="side-nav-header-user">
+          <img
+            class="img-user"
+            [src]="
+              user?.imgUri ??
+              'https://ui-avatars.com/api/?name=' +
+                user?.firstName +
+                ' ' +
+                user?.surname +
+                '&background=ff40b1&color=fff'
+            "
+            alt="img user"
+          />
+          <div class="user-info">
+            <h3>
+              {{
+                user?.firstName +
+                  (" " + user?.middleName) +
+                  (" " + user?.surname) +
+                  (" " + user?.lastName)
+              }}
+            </h3>
+            <h3>{{ user?.email }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <div class="content-routes"></div>
+      <div class="content-logout">
+        <div class="route-item">
+          <mat-icon>logout</mat-icon>
+          <span>Cerrar Sesión</span>
+        </div>
+      </div>
+    </div>
+  </mat-drawer>
+  <app-appbar *ngIf="isLoggedIn | async"></app-appbar>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
