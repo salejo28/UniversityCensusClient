@@ -20,35 +20,46 @@
                 user?.firstName +
                 ' ' +
                 user?.surname +
-                '&background=ff40b1&color=fff'
+                '&background=3f51b5&color=fff'
             "
             alt="img user"
           />
           <div class="user-info">
             <h3>
-              {{
-                user?.firstName +
-                  (" " + user?.middleName) +
-                  (" " + user?.surname) +
-                  (" " + user?.lastName)
-              }}
+              {{ user?.firstName + (" " + user?.surname) }}
             </h3>
-            <h3>{{ user?.email }}</h3>
+            <h4>{{ user?.email }}</h4>
           </div>
         </div>
       </div>
       <div class="spacer"></div>
-      <div class="content-routes"></div>
+      <div class="content-routes">
+        <button
+          *ngFor="let route of routes"
+          [ngClass]="
+            currentRoute && currentRoute === route.path ? 'route-active' : ''
+          "
+          class="route-item route-normal"
+          (click)="handleNavigate(route.path)"
+        >
+          <mat-icon *ngIf="route.icon">{{ route.icon }}</mat-icon>
+          <span>{{ route.name }}</span>
+        </button>
+      </div>
       <div class="content-logout">
-        <div class="route-item">
+        <button (click)="logout()" class="route-item route-item-logout">
           <mat-icon>logout</mat-icon>
           <span>Cerrar Sesión</span>
-        </div>
+        </button>
       </div>
     </div>
   </mat-drawer>
   <app-appbar *ngIf="isLoggedIn | async"></app-appbar>
-  <div class="container">
+  <div
+    [ngClass]="
+      currentRoute !== '/' && currentRoute !== '/register' ? 'container' : ''
+    "
+  >
     <router-outlet></router-outlet>
   </div>
 </mat-drawer-container>

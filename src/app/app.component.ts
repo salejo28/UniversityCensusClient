@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Event, NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { filter, Observable } from 'rxjs';
 import { NavService } from 'services/nav/nav.service';
-import { UserUI } from 'types';
+import { RoutesUI, UserUI } from 'types';
 import { AuthService } from './services/auth/auth.service';
 import { UserService } from './services/user/user.service';
 
@@ -15,13 +16,46 @@ export class AppComponent {
   isLoggedIn: Observable<boolean> | undefined;
   showSideNav: Observable<boolean> | undefined;
   user: UserUI | undefined;
-  routes = [];
-
+  currentRoute: string | undefined;
+  routes: RoutesUI[] = [
+    {
+      name: 'Home',
+      path: '/dashboard',
+      icon: 'home',
+    },
+    {
+      name: 'Usuarios',
+      path: '/users',
+      icon: 'people',
+    },
+    {
+      name: 'Especies',
+      path: '/species',
+      icon: 'pets',
+    },
+    {
+      name: 'Razas',
+      path: '/races',
+      icon: 'pets',
+    },
+    {
+      name: 'Sectores',
+      path: '/sectors',
+      icon: 'place',
+    },
+  ];
   constructor(
     private authService: AuthService,
     private navService: NavService,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private router: Router
+  ) {
+    router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentRoute = event.url;
+      }
+    });
+  }
 
   ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn;
@@ -38,6 +72,22 @@ export class AppComponent {
         },
       });
     }
+  }
+
+  handleNavigate(route: string) {
+    this.navService.setShowSideNav = false;
+    this.router.navigate([`${route}`]);
+  }
+
+  logout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        localStorage.removeItem('signin');
+      },
+      complete: () => {
+        this.router.navigate(['/']);
+      },
+    });
   }
 
   backdropClick() {

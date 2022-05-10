@@ -42,3 +42,9 @@ export interface UserUI {
   idType: string;
   createdAt: string;
 }
+
+export interface RoutesUI {
+  path: string;
+  name: string;
+  icon?: string;
+}
