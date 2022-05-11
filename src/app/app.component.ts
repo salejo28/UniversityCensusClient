@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
-import { Event, NavigationEnd, Router, RouterEvent } from '@angular/router';
-import { filter, Observable } from 'rxjs';
+import {
+  Event,
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+} from '@angular/router';
+import { Observable } from 'rxjs';
 import { NavService } from 'services/nav/nav.service';
 import { RoutesUI, UserUI } from 'types';
 import { AuthService } from './services/auth/auth.service';
@@ -17,6 +24,7 @@ export class AppComponent {
   showSideNav: Observable<boolean> | undefined;
   user: UserUI | undefined;
   currentRoute: string | undefined;
+  loading: boolean = false;
   routes: RoutesUI[] = [
     {
       name: 'Home',
@@ -54,7 +62,40 @@ export class AppComponent {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.url;
       }
+
+      switch (true) {
+        case event instanceof NavigationStart:
+          this.loading = true;
+          break;
+        case event instanceof NavigationEnd:
+          this.loading = false;
+          break;
+        case event instanceof NavigationCancel:
+          this.loading = false;
+          break;
+        case event instanceof NavigationError:
+          this.loading = false;
+          break;
+
+        default:
+          break;
+      }
     });
+  }
+
+  ngOnChanges() {
+    if (localStorage.getItem('signin') === 'true') {
+      this.authService.setLoggedIn = true;
+      this.userService.profile().subscribe({
+        next: (response: any) => {
+          this.user = response;
+          this.userService.setUser = response;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
 
   ngOnInit() {
@@ -80,6 +121,8 @@ export class AppComponent {
   }
 
   logout() {
+    this.authService.setLoggedIn = false;
+    this.navService.setShowSideNav = false;
     this.authService.logout().subscribe({
       next: () => {
         localStorage.removeItem('signin');

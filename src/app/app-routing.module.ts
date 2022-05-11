@@ -30,7 +30,7 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard],
     data: {
-      roles: ['client'],
+      roles: ['client', 'admin'],
     },
   },
   {

@@ -10,5 +10,14 @@ import { UserService } from '@app/services/user/user.service';
 export class DashboardComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userService.profile().subscribe({
+      next: (response: any) => {
+        this.userService.setUser = response;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 }
