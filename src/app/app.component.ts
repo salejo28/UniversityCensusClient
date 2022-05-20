@@ -25,6 +25,7 @@ export class AppComponent {
   user: UserUI | undefined;
   currentRoute: string | undefined;
   loading: boolean = false;
+  showUser: boolean = false;
   routes: RoutesUI[] = [
     {
       name: 'Home',
@@ -81,27 +82,30 @@ export class AppComponent {
           break;
       }
     });
-  }
 
-  ngOnChanges() {
-    if (localStorage.getItem('signin') === 'true') {
-      this.authService.setLoggedIn = true;
-      this.userService.profile().subscribe({
-        next: (response: any) => {
-          this.user = response;
-          this.userService.setUser = response;
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-    }
+    authService.isLoggedIn.subscribe({
+      next: (value) => {
+        this.showUser = value;
+      },
+      complete: () => {
+        this.authService.setLoggedIn = true;
+        this.userService.profile().subscribe({
+          next: (response: any) => {
+            this.user = response;
+            this.userService.setUser = response;
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      },
+    });
   }
 
   ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn;
     this.showSideNav = this.navService.isShowSideNav;
-    if (localStorage.getItem('signin') === 'true') {
+    if (localStorage.getItem('signin') === 'true' || this.showUser) {
       this.authService.setLoggedIn = true;
       this.userService.profile().subscribe({
         next: (response: any) => {

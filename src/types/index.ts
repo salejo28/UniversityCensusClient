@@ -23,7 +23,8 @@ export interface DataRgisterUI {
 export interface FieldRegisterUI {
   name: string;
   label: string;
-  type: 'text' | 'email' | 'password' | 'select';
+  type: 'text' | 'email' | 'password' | 'select' | 'date';
+  disabled?: boolean;
 }
 
 type RoleType = 'admin' | 'boss' | 'official' | 'client';

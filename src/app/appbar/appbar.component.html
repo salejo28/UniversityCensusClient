@@ -1,15 +1,17 @@
 <mat-toolbar color="primary">
   <button
     mat-icon-button
-    class="example-icon"
     aria-label="Example icon-button with menu icon"
     (click)="toggleSideNav()"
   >
     <mat-icon>menu</mat-icon>
   </button>
 
-  <span>Censo de Animales</span>
+  <span routerLink="/dashboard" class="title-app-bar">Censo de Animales</span>
   <span class="spacer"></span>
+  <button mat-raised-button routerLink="/profile" class="btn-profile">
+    Perfil
+  </button>
   <img
     class="img-user"
     [src]="

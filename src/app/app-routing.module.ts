@@ -7,6 +7,8 @@ import { PagenotfoundComponent } from '@app/pagenotfound/pagenotfound.component'
 import { DashboardComponent } from '@app/dashboard/dashboard.component';
 import { AuthGuard } from '@app/auth/auth.guard';
 import { ProfileComponent } from '@app/profile/profile.component';
+import { UsersComponent } from '@app/users/users.component';
+import { UserFormComponent } from './users/user-form/user-form.component';
 
 const routes: Routes = [
   {
@@ -31,6 +33,30 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {
       roles: ['client', 'admin'],
+    },
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss'],
+    },
+  },
+  {
+    path: 'users/create',
+    component: UserFormComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss'],
+    },
+  },
+  {
+    path: 'users/edit/:id',
+    component: UserFormComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss'],
     },
   },
   {

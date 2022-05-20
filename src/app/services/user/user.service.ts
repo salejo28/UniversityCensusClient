@@ -32,4 +32,14 @@ export class UserService {
   profile() {
     return this.http.get(`${this.endpoint}/user/profile/`, this.options);
   }
+
+  updateUser(data: any, id: number) {
+    return this.http.put(`${this.endpoint}/user/${id}`, data, this.options);
+  }
+
+  uploadImage() {}
+
+  getAllOfficials() {
+    return this.http.get(`${this.endpoint}/user/officials/`, this.options);
+  }
 }

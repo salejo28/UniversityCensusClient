@@ -7,8 +7,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
@@ -23,6 +27,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { interceptortproviders } from './helpers/auth.interceptor';
 import { AppbarComponent } from './appbar/appbar.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsersComponent } from './users/users.component';
+import { UserFormComponent } from './users/user-form/user-form.component';
 
 export function playerFactory() {
   return player;
@@ -37,6 +43,8 @@ export function playerFactory() {
     DashboardComponent,
     AppbarComponent,
     ProfileComponent,
+    UsersComponent,
+    UserFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +61,10 @@ export function playerFactory() {
     MatSidenavModule,
     MatCardModule,
     MatProgressBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDialogModule,
+    MatTableModule,
   ],
   providers: [interceptortproviders],
   bootstrap: [AppComponent],

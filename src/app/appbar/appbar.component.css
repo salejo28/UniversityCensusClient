@@ -7,3 +7,19 @@
   width: 40px;
   height: 40px;
 }
+
+.btn-profile {
+  margin-right: 10px;
+}
+
+.title-app-bar {
+  margin-left: 10px;
+  cursor: pointer;
+  display: none;
+}
+
+@media screen and (min-width: 425px) {
+  .title-app-bar {
+    display: block;
+  }
+}
