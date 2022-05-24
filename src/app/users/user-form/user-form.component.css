@@ -7,3 +7,14 @@
 .header h1 {
   margin-left: 100px;
 }
+
+.content-form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.btn-register {
+  float: right;
+}

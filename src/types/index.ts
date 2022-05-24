@@ -25,6 +25,10 @@ export interface FieldRegisterUI {
   label: string;
   type: 'text' | 'email' | 'password' | 'select' | 'date';
   disabled?: boolean;
+  options?: {
+    label: string;
+    value: string;
+  }[];
 }
 
 type RoleType = 'admin' | 'boss' | 'official' | 'client';

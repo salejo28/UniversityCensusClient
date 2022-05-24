@@ -7,5 +7,56 @@
 </div>
 
 <div>
-  <form></form>
+  <form [formGroup]="registerForm">
+    <div class="content-form">
+      <mat-form-field *ngFor="let field of fields" class="form-register-input">
+        <mat-label>
+          {{ field.label }}
+        </mat-label>
+
+        <!-- Select -->
+        <mat-select
+          *ngIf="field.type === 'select'"
+          formControlName="{{ field.name }}"
+        >
+          <mat-option
+            *ngFor="let option of field.options"
+            value="{{ option.value }}"
+            >{{ option.label }}</mat-option
+          >
+        </mat-select>
+
+        <input
+          *ngIf="field.type !== 'select'"
+          type="{{ field.type }}"
+          matInput
+          formControlName="{{ field.name }}"
+        />
+
+        <mat-error
+          *ngIf="registerForm.get(field.name)?.errors?.['required'] && field.type !== 'password'"
+        >
+          El {{ field.label.toLowerCase() }} es <strong>requerido</strong>
+        </mat-error>
+
+        <!-- Password Errors -->
+        <mat-error
+          *ngIf="registerForm.get('password')?.errors?.['required'] && field.type === 'password'"
+        >
+          La contraseña es <strong>requerida</strong>
+        </mat-error>
+        <mat-error
+          *ngIf="registerForm.get('password')?.errors?.['minlength'] && field.type === 'password'"
+        >
+          La contraseña debe tener al menos
+          {{registerForm.get('password')?.errors?.['minlength'].requiredLength}}
+          carácteres
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" class="btn-register">
+      Guardar
+    </button>
+  </form>
 </div>
