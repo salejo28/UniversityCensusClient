@@ -33,8 +33,16 @@ export class UserService {
     return this.http.get(`${this.endpoint}/user/profile/`, this.options);
   }
 
+  createUser(data: any) {
+    return this.http.post(`${this.endpoint}/user/`, data, this.options);
+  }
+
   updateUser(data: any, id: number) {
     return this.http.put(`${this.endpoint}/user/${id}`, data, this.options);
+  }
+
+  getUserById(uid: string | number) {
+    return this.http.get(`${this.endpoint}/user/${uid}`, this.options);
   }
 
   uploadImage() {}

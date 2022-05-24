@@ -1,13 +1,13 @@
 <div class="header">
-  <button mat-button>
+  <button mat-button (click)="goBack()">
     <mat-icon>keyboard_arrow_left</mat-icon>
     Volver
   </button>
-  <h1 matCardTitle>Crear Nuevo Oficial</h1>
+  <h1 matCardTitle>{{ edit ? "Editar Oficial" : "Crear Nuevo Oficial" }}</h1>
 </div>
 
 <div>
-  <form [formGroup]="registerForm">
+  <form [formGroup]="registerForm" (ngSubmit)="handleSubmit($event)">
     <div class="content-form">
       <mat-form-field *ngFor="let field of fields" class="form-register-input">
         <mat-label>
@@ -55,8 +55,24 @@
       </mat-form-field>
     </div>
 
-    <button mat-raised-button color="primary" class="btn-register">
-      Guardar
+    <button
+      mat-raised-button
+      color="primary"
+      class="btn-register"
+      [disabled]="
+          registerForm.get('email')?.value === '' ||
+          registerForm.get('password')?.value === '' ||
+          registerForm.get('password')?.errors?.['required'] || 
+          registerForm.get('password')?.errors?.['minlength'] ||
+          registerForm.get('email')?.errors?.['email'] ||
+          registerForm.get('email')?.errors?.['required'] ||
+          registerForm.get('firstName')?.errors?.['required'] ||
+          registerForm.get('surname')?.errors?.['required'] ||
+          registerForm.get('role')?.errors?.['required'] ||
+          registerForm.get('idType')?.errors?.['required'] ||
+          registerForm.get('idNumber')?.errors?.['required']"
+    >
+      {{ edit ? "Actualizar" : "Guardar" }}
     </button>
   </form>
 </div>

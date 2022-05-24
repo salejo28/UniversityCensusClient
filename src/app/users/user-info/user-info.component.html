@@ -1,0 +1,104 @@
+<div class="header">
+  <button mat-button (click)="goBack()">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+    Volver
+  </button>
+  <h1 matCardTitle>Oficial {{ user?.firstName + " " + user?.surname }}</h1>
+</div>
+<div class="container">
+  <h1>Mi Perfil</h1>
+  <div class="content-profile">
+    <div class="content-img">
+      <img
+        class="img-user"
+        [src]="
+          user?.imgUri ??
+          'https://ui-avatars.com/api/?name=' +
+            user?.firstName +
+            ' ' +
+            user?.surname +
+            '&background=3f51b5&color=fff'
+        "
+        alt="img user"
+      />
+      <div class="upload-img-text" (click)="file.click()">
+        <mat-icon>cloud_upload</mat-icon>
+        <h3>
+          {{
+            user?.imgUri
+              ? "Actualiza tu foto de perfil"
+              : "Carga tu foto de perfil"
+          }}
+        </h3>
+      </div>
+      <input type="file" accept="image" #file class="input-file" />
+    </div>
+    <div class="content-info">
+      <div class="content_btns">
+        <button
+          mat-raised-button
+          color="accent"
+          class="btn"
+          (click)="handleEdit()"
+          [disabled]="dataUserForm.status !== 'DISABLED'"
+        >
+          Editar Información
+        </button>
+      </div>
+      <div>
+        <div>
+          <h3>Documento: {{ user?.idType }}</h3>
+        </div>
+        <div>
+          <h3>Número de Documento: {{ user?.idType }}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="form">
+      <form [formGroup]="dataUserForm">
+        <div class="content-form">
+          <mat-form-field
+            *ngFor="let field of fields"
+            class="form-register-input"
+          >
+            <mat-label>
+              {{ field.label }}
+            </mat-label>
+            <input
+              formControlName="{{ field.name }}"
+              *ngIf="field.type === 'date'"
+              matInput
+              [matDatepicker]="datepicker"
+            />
+            <mat-datepicker-toggle
+              *ngIf="field.type === 'date'"
+              matSuffix
+              [for]="datepicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancelar</button>
+                <button mat-raised-button color="primary" matDatepickerApply>
+                  Seleccionar
+                </button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+
+            <input
+              *ngIf="field.type !== 'date'"
+              type="{{ field.type }}"
+              matInput
+              formControlName="{{ field.name }}"
+            />
+
+            <mat-error
+              *ngIf="dataUserForm.get(field.name)?.errors?.['required'] && field.type !== 'password'"
+            >
+              El {{ field.label.toLowerCase() }} es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

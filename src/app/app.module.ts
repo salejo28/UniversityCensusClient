@@ -29,6 +29,10 @@ import { AppbarComponent } from './appbar/appbar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
 import { UserFormComponent } from './users/user-form/user-form.component';
+import { UserInfoComponent } from './users/user-info/user-info.component';
+import { SpeciesComponent } from './species/species.component';
+import { FormSpeciesComponent } from './species/form-species/form-species.component';
+import { InfoSpecieComponent } from './species/info-specie/info-specie.component';
 
 export function playerFactory() {
   return player;
@@ -45,6 +49,10 @@ export function playerFactory() {
     ProfileComponent,
     UsersComponent,
     UserFormComponent,
+    UserInfoComponent,
+    SpeciesComponent,
+    FormSpeciesComponent,
+    InfoSpecieComponent,
   ],
   imports: [
     BrowserModule,

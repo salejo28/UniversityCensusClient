@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 import { AuthService } from '@app/services/auth/auth.service';
+import { UserService } from '@app/services/user/user.service';
 import { FieldRegisterUI } from 'types';
 
 @Component({
@@ -10,6 +13,23 @@ import { FieldRegisterUI } from 'types';
   styleUrls: ['./user-form.component.css'],
 })
 export class UserFormComponent implements OnInit {
+  roles = [
+    {
+      label: 'Administrador',
+      value: '1',
+      additional: 'admin',
+    },
+    {
+      label: 'Jefe',
+      value: '2',
+      additional: 'boss',
+    },
+    {
+      label: 'Oficial',
+      value: '3',
+      additional: 'official',
+    },
+  ];
   fields: FieldRegisterUI[] = [
     {
       label: 'Primer Nombre',
@@ -50,20 +70,7 @@ export class UserFormComponent implements OnInit {
       label: 'Rol',
       name: 'role',
       type: 'select',
-      options: [
-        {
-          label: 'Administrador',
-          value: '1',
-        },
-        {
-          label: 'Jefe',
-          value: '2',
-        },
-        {
-          label: 'Oficial',
-          value: '3',
-        },
-      ],
+      options: this.roles,
     },
     {
       label: 'Contraseña',
@@ -88,10 +95,52 @@ export class UserFormComponent implements OnInit {
     ]),
     role: new FormControl('', [Validators.required]),
   });
+  edit: boolean = false;
+  uid: string | undefined;
 
-  constructor(private router: Router, private serviceAuth: AuthService) {}
+  constructor(
+    private router: Router,
+    private serviceAuth: AuthService,
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.getTypesOfIdentification();
+    const isEdit = this.activatedRoute.snapshot.queryParamMap.get('edit');
+    const idUser =
+      this.activatedRoute.snapshot.queryParamMap.get('uid') || undefined;
+    this.edit = isEdit === 'true';
+    this.uid = idUser;
+    if (idUser) {
+      this.handleGetDataUser(idUser);
+    }
+  }
+
+  handleGetDataUser(uid: string | number) {
+    this.userService.getUserById(uid).subscribe({
+      next: (response: any) => {
+        this.fields.map((field) => {
+          if (field.name === 'role') {
+            this.registerForm.controls['role'].setValue(
+              this.roles.find((role) => role.additional === response.role)
+                ?.value
+            );
+            return;
+          }
+          this.registerForm.controls[`${field.name}`].setValue(
+            response[field.name]
+          );
+          this.registerForm.controls['idType'].disable();
+          this.registerForm.controls['idNumber'].disable();
+          this.registerForm.controls['password'].disable();
+          this.registerForm.controls['role'].disable();
+        });
+      },
+    });
+  }
+
+  getTypesOfIdentification() {
     this.serviceAuth.getTypesIdentification().subscribe({
       next: (response: any) => {
         const fieldTypeOfIdentification = this.fields.find(
@@ -110,6 +159,54 @@ export class UserFormComponent implements OnInit {
         alert('Ocurrio algo inesperado');
       },
     });
+  }
+
+  handleToast(message: string, icon?: 'error' | 'success') {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      timer: 4000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+    Toast.fire({
+      title: message,
+      icon: icon ?? 'success',
+    });
+  }
+
+  handleSubmit(e: Event): void {
+    e.preventDefault();
+    if (!this.edit) {
+      this.userService.createUser(this.registerForm.value).subscribe({
+        next: () => {
+          this.handleToast('Usuario creado');
+        },
+        error: (err) => {
+          this.handleToast(err.error.error, 'error');
+        },
+        complete: () => {
+          this.goBack();
+        },
+      });
+      return;
+    }
+
+    this.userService
+      .updateUser(this.registerForm.value, parseInt(this.uid as string))
+      .subscribe({
+        next: () => {},
+        error: (err) => {
+          this.handleToast(err.error.error, 'error');
+        },
+        complete: () => {
+          this.goBack();
+        },
+      });
   }
 
   goBack() {

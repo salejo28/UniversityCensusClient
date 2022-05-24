@@ -32,6 +32,13 @@ export interface FieldRegisterUI {
 }
 
 type RoleType = 'admin' | 'boss' | 'official' | 'client';
+
+export interface SpecieUI {
+  id?: number;
+  name: string;
+  isPet: string;
+  createdAt?: string;
+}
 export interface UserUI {
   id: number;
   bornDate: string | null;

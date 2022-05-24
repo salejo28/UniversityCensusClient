@@ -9,6 +9,10 @@ import { AuthGuard } from '@app/auth/auth.guard';
 import { ProfileComponent } from '@app/profile/profile.component';
 import { UsersComponent } from '@app/users/users.component';
 import { UserFormComponent } from './users/user-form/user-form.component';
+import { UserInfoComponent } from './users/user-info/user-info.component';
+import { SpeciesComponent } from './species/species.component';
+import { FormSpeciesComponent } from './species/form-species/form-species.component';
+import { InfoSpecieComponent } from './species/info-specie/info-specie.component';
 
 const routes: Routes = [
   {
@@ -52,8 +56,48 @@ const routes: Routes = [
     },
   },
   {
-    path: 'users/edit/:id',
+    path: 'users/edit',
     component: UserFormComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss'],
+    },
+  },
+  {
+    path: 'users/info',
+    component: UserInfoComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss'],
+    },
+  },
+  {
+    path: 'species',
+    component: SpeciesComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss'],
+    },
+  },
+  {
+    path: 'species/create',
+    component: FormSpeciesComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss'],
+    },
+  },
+  {
+    path: 'species/edit',
+    component: FormSpeciesComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss'],
+    },
+  },
+  {
+    path: 'species/info',
+    component: InfoSpecieComponent,
     canActivate: [AuthGuard],
     data: {
       roles: ['admin', 'boss'],

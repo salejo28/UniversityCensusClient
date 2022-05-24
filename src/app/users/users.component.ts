@@ -29,6 +29,27 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  handleEdit(uid: string) {
+    this.router.navigate(['/users/edit'], {
+      replaceUrl: false,
+      queryParamsHandling: null,
+      queryParams: {
+        edit: true,
+        uid,
+      },
+    });
+  }
+
+  handleViewUser(uid: string) {
+    this.router.navigate(['/users/info'], {
+      replaceUrl: false,
+      queryParamsHandling: null,
+      queryParams: {
+        uid,
+      },
+    });
+  }
+
   handleCreate() {
     this.router.navigate(['/users/create']);
   }
