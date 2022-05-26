@@ -13,6 +13,9 @@ import { UserInfoComponent } from './users/user-info/user-info.component';
 import { SpeciesComponent } from './species/species.component';
 import { FormSpeciesComponent } from './species/form-species/form-species.component';
 import { InfoSpecieComponent } from './species/info-specie/info-specie.component';
+import { RacesComponent } from './races/races.component';
+import { RaceFormComponent } from './races/race-form/race-form.component';
+import { RaceInfoComponent } from './races/race-info/race-info.component';
 
 const routes: Routes = [
   {
@@ -98,6 +101,38 @@ const routes: Routes = [
   {
     path: 'species/info',
     component: InfoSpecieComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss'],
+    },
+  },
+  {
+    path: 'races',
+    component: RacesComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss'],
+    },
+  },
+  {
+    path: 'races/edit',
+    component: RaceFormComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss'],
+    },
+  },
+  {
+    path: 'races/create',
+    component: RaceFormComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss'],
+    },
+  },
+  {
+    path: 'races/info',
+    component: RaceInfoComponent,
     canActivate: [AuthGuard],
     data: {
       roles: ['admin', 'boss'],

@@ -39,6 +39,15 @@ export interface SpecieUI {
   isPet: string;
   createdAt?: string;
 }
+
+export interface RaceUI {
+  id?: number;
+  name: string;
+  dangerous: number | boolean;
+  specie: string | number;
+  createdAt?: string;
+}
+
 export interface UserUI {
   id: number;
   bornDate: string | null;

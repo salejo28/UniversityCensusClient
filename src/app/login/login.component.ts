@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     const signin = localStorage.getItem('signin');
     if (signin === 'true') {
-      this.router.navigate(['/dashboard']);
+      location.replace('http://localhost:4200/dashboard');
     }
   }
 
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
           icon: 'error',
         });
       },
-      complete: () => this.router.navigate(['/dashboard']),
+      complete: () => location.replace('http://localhost:4200/dashboard'),
     });
   }
 }

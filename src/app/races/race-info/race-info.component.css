@@ -1,0 +1,30 @@
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header h1 {
+  margin-left: 100px;
+}
+
+.container-form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6rem;
+}
+
+.content-form {
+  padding: 10px;
+  width: 300px;
+}
+
+.btn-register {
+  float: right;
+}
+
+.form-register-input {
+  width: 100%;
+}

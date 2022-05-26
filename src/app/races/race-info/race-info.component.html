@@ -3,11 +3,11 @@
     <mat-icon>keyboard_arrow_left</mat-icon>
     Volver
   </button>
-  <h1 matCardTitle>{{ edit ? "Editar Especie" : "Crear Nueva Especie" }}</h1>
+  <h1 matCardTitle>{{ race?.name }}</h1>
 </div>
 
 <div class="container-form">
-  <form [formGroup]="specieForm" (ngSubmit)="handleSubmit($event)">
+  <form [formGroup]="raceForm">
     <div class="content-form">
       <mat-form-field *ngFor="let field of fields" class="form-register-input">
         <mat-label>
@@ -32,10 +32,6 @@
           matInput
           formControlName="{{ field.name }}"
         />
-
-        <mat-error *ngIf="specieForm.get(field.name)?.errors?.['required']">
-          El {{ field.label.toLowerCase() }} es <strong>requerido</strong>
-        </mat-error>
       </mat-form-field>
     </div>
 
@@ -43,13 +39,10 @@
       mat-raised-button
       color="primary"
       class="btn-register"
-      [disabled]="
-          specieForm.get('isPet')?.value === '' ||
-          specieForm.get('name')?.value === '' ||
-          specieForm.get('isPet')?.errors?.['required'] || 
-          specieForm.get('name')?.errors?.['required']"
+      type="button"
+      (click)="handleEdit()"
     >
-      {{ edit ? "Actualizar" : "Guardar" }}
+      Actualizar
     </button>
   </form>
 </div>

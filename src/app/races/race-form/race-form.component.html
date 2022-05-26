@@ -3,11 +3,11 @@
     <mat-icon>keyboard_arrow_left</mat-icon>
     Volver
   </button>
-  <h1 matCardTitle>{{ edit ? "Editar Especie" : "Crear Nueva Especie" }}</h1>
+  <h1 matCardTitle>{{ edit ? "Editar raza" : "Crear Nueva Raza" }}</h1>
 </div>
 
 <div class="container-form">
-  <form [formGroup]="specieForm" (ngSubmit)="handleSubmit($event)">
+  <form [formGroup]="raceForm" (ngSubmit)="handleSubmit($event)">
     <div class="content-form">
       <mat-form-field *ngFor="let field of fields" class="form-register-input">
         <mat-label>
@@ -33,7 +33,7 @@
           formControlName="{{ field.name }}"
         />
 
-        <mat-error *ngIf="specieForm.get(field.name)?.errors?.['required']">
+        <mat-error *ngIf="raceForm.get(field.name)?.errors?.['required']">
           El {{ field.label.toLowerCase() }} es <strong>requerido</strong>
         </mat-error>
       </mat-form-field>
@@ -44,10 +44,13 @@
       color="primary"
       class="btn-register"
       [disabled]="
-          specieForm.get('isPet')?.value === '' ||
-          specieForm.get('name')?.value === '' ||
-          specieForm.get('isPet')?.errors?.['required'] || 
-          specieForm.get('name')?.errors?.['required']"
+          raceForm.get('name')?.value === '' ||
+          raceForm.get('specie')?.value === '' ||
+          raceForm.get('name')?.errors?.['required'] || 
+          raceForm.get('specie')?.errors?.['required'] ||
+          raceForm.get('dangerous')?.errors?.['required'] ||
+          raceForm.get('dangerous')?.errors?.['required'] 
+          "
     >
       {{ edit ? "Actualizar" : "Guardar" }}
     </button>

@@ -33,6 +33,12 @@ import { UserInfoComponent } from './users/user-info/user-info.component';
 import { SpeciesComponent } from './species/species.component';
 import { FormSpeciesComponent } from './species/form-species/form-species.component';
 import { InfoSpecieComponent } from './species/info-specie/info-specie.component';
+import { RacesComponent } from './races/races.component';
+import { RaceFormComponent } from './races/race-form/race-form.component';
+import { RaceInfoComponent } from './races/race-info/race-info.component';
+import { SectorsComponent } from './sectors/sectors.component';
+import { FormSectorComponent } from './sectors/form-sector/form-sector.component';
+import { InfoSectorComponent } from './sectors/info-sector/info-sector.component';
 
 export function playerFactory() {
   return player;
@@ -53,6 +59,12 @@ export function playerFactory() {
     SpeciesComponent,
     FormSpeciesComponent,
     InfoSpecieComponent,
+    RacesComponent,
+    RaceFormComponent,
+    RaceInfoComponent,
+    SectorsComponent,
+    FormSectorComponent,
+    InfoSectorComponent,
   ],
   imports: [
     BrowserModule,
