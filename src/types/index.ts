@@ -69,3 +69,20 @@ export interface RoutesUI {
   name: string;
   icon?: string;
 }
+
+export interface Geolocation {
+  lat: number;
+  lng: number;
+}
+
+export interface SectorUI {
+  id?: number;
+  name: string;
+  isNeighborhood: boolean;
+  isSidewalk: boolean;
+  start: Geolocation;
+  end: Geolocation;
+  officialId: string | number | null;
+  official: string;
+  createdAt?: string;
+}

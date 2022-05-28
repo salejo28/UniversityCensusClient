@@ -29,6 +29,18 @@ export class SectorsService {
     return this.http.post(`${this.endpoint}/sector/`, data, this.options);
   }
 
+  assignSector(data: any) {
+    return this.http.post(
+      `${this.endpoint}/sector/assign/`,
+      data,
+      this.options
+    );
+  }
+
+  unAssignSector(id: string) {
+    return this.http.post(`${this.endpoint}/sector/${id}`, {}, this.options);
+  }
+
   updateSector(data: any, id: string) {
     return this.http.put(`${this.endpoint}/sector/${id}`, data, this.options);
   }

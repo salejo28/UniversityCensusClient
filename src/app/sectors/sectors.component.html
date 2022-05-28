@@ -1,1 +1,71 @@
-<p>sectors works!</p>
+<div class="header">
+  <h1>Sectores</h1>
+  <button mat-raised-button color="accent" (click)="handleCreate()">
+    Crear
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<table mat-table [dataSource]="sectors" class="mat-elevation-z8">
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let sector">{{ sector.id }}</td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let sector">
+      {{ sector.name }}
+    </td>
+  </ng-container>
+  <!-- Email Column -->
+  <ng-container matColumnDef="isNeighborhood">
+    <th mat-header-cell *matHeaderCellDef>Es barrio</th>
+    <td mat-cell *matCellDef="let sector">
+      {{ sector.isNeighborhood ? "Si" : "No" }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="isSidewalk">
+    <th mat-header-cell *matHeaderCellDef>Es vereda</th>
+    <td mat-cell *matCellDef="let sector">
+      {{ sector.isSidewalk ? "Si" : "No" }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="official">
+    <th mat-header-cell *matHeaderCellDef>Funcionario</th>
+    <td mat-cell *matCellDef="let sector">
+      {{ sector.official !== "" ? sector.official : "No se ha asignado" }}
+    </td>
+  </ng-container>
+  <!-- Id Number Column -->
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef>Fecha de Creación</th>
+    <td mat-cell *matCellDef="let sector">
+      {{ handleFormatDate(sector.createdAt) }}
+    </td>
+  </ng-container>
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+    <td mat-cell *matCellDef="let sector">
+      <button mat-icon-button (click)="handleView(sector.id)">
+        <mat-icon>remove_red_eye</mat-icon>
+      </button>
+      <button mat-icon-button (click)="handleEdit(sector.id)">
+        <mat-icon color="primary">edit</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="assignOrUnAssign(sector.id, !sector.officialId)"
+      >
+        {{ sector.officialId ? "Liberar" : "Asignar" }}
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
