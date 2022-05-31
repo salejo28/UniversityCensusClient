@@ -86,3 +86,14 @@ export interface SectorUI {
   official: string;
   createdAt?: string;
 }
+
+export interface AnimalUI {
+  id?: number;
+  name: string;
+  bornDate: string;
+  createdAt: string;
+  owner: string;
+  ownerId: number;
+  race: string;
+  raceId: number;
+}

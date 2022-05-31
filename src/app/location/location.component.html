@@ -1,0 +1,58 @@
+<div class="header">
+  <button mat-button (click)="goBack()">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+    Volver
+  </button>
+  <h1 matCardTitle>My dirección</h1>
+</div>
+
+<div id="map"></div>
+
+<div class="container-form">
+  <form [formGroup]="locationForm" (ngSubmit)="handleSubmit($event)">
+    <div class="content-form">
+      <mat-form-field *ngFor="let field of fields" class="form-register-input">
+        <mat-label>
+          {{ field.label }}
+        </mat-label>
+
+        <!-- Select -->
+        <mat-select
+          *ngIf="field.type === 'select'"
+          formControlName="{{ field.name }}"
+        >
+          <mat-option
+            *ngFor="let option of field.options"
+            value="{{ option.value }}"
+            >{{ option.label }}</mat-option
+          >
+        </mat-select>
+
+        <input
+          *ngIf="field.type !== 'select'"
+          type="{{ field.type }}"
+          matInput
+          formControlName="{{ field.name }}"
+        />
+
+        <mat-error *ngIf="locationForm.get(field.name)?.errors?.['required']">
+          El {{ field.label.toLowerCase() }} es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      class="btn-register"
+      [disabled]="
+          locationForm.get('address')?.value === '' ||
+          locationForm.get('sector')?.value === '' ||
+          locationForm.get('address')?.errors?.['required'] || 
+          locationForm.get('sector')?.errors?.['required'] || locationForm.status === 'DISABLED'
+          "
+    >
+      {{ edit ? "Actualizar" : "Guardar" }}
+    </button>
+  </form>
+</div>

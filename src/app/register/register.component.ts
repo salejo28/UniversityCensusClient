@@ -85,6 +85,10 @@ export class RegisterComponent implements OnInit {
 
   handleSubmit(e: Event): void {
     e.preventDefault();
-    console.log(this.registerForm.value);
+    this.service.register(this.registerForm.value).subscribe({
+      next: () => {
+        location.replace('http://localhost:4200/dashboard');
+      },
+    });
   }
 }

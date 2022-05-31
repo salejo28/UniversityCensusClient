@@ -38,6 +38,14 @@
         >
           Editar Información
         </button>
+        <button
+          *ngIf="user?.role === 'client'"
+          mat-raised-button
+          (click)="goLocation()"
+          color="primary"
+        >
+          Dirección
+        </button>
       </div>
       <div>
         <div>

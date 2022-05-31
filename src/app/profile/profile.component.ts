@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { UserService } from '@app/services/user/user.service';
 import { FieldRegisterUI, UserUI } from 'types';
 import { formatDate } from '@app/utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -97,7 +98,11 @@ export class ProfileComponent implements OnInit {
     ),
   });
 
-  constructor(private userService: UserService, public dialog: MatDialog) {}
+  constructor(
+    private userService: UserService,
+    public dialog: MatDialog,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getProfile();
@@ -130,6 +135,10 @@ export class ProfileComponent implements OnInit {
         });
       },
     });
+  }
+
+  goLocation() {
+    this.router.navigate(['/location']);
   }
 
   toggleDisabledForm(enable?: boolean) {

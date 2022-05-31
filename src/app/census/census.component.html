@@ -1,0 +1,113 @@
+<div class="header">
+  <h1>Censos</h1>
+  <div class="content-inputs">
+    <!-- Date Init -->
+    <mat-form-field class="form-register-input">
+      <mat-label>Fecha de Inicio</mat-label>
+      <input matInput [max]="max" [matDatepicker]="datepicker" />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="datepicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #datepicker>
+        <mat-datepicker-actions>
+          <button mat-button matDatepickerCancel>Cancelar</button>
+          <button mat-raised-button color="primary" matDatepickerApply>
+            Seleccionar
+          </button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+    </mat-form-field>
+    <!-- Date End -->
+    <mat-form-field class="form-register-input">
+      <mat-label>Fecha de Fin</mat-label>
+      <input matInput [max]="max" [matDatepicker]="datepicker" />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="datepicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #datepicker>
+        <mat-datepicker-actions>
+          <button mat-button matDatepickerCancel>Cancelar</button>
+          <button mat-raised-button color="primary" matDatepickerApply>
+            Seleccionar
+          </button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+    </mat-form-field>
+    <!-- Sector -->
+    <mat-form-field class="form-register-input">
+      <mat-label>Sector</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let option of sectors" value="{{ option.value }}">{{
+          option.label
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="accent" (click)="handleCreate()">
+    Crear
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<table
+  mat-table
+  [dataSource]="census"
+  class="mat-elevation-z8"
+  style="width: 100%; margin-top: 20px"
+>
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let census">{{ census.id }}</td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="ownerName">
+    <th mat-header-cell *matHeaderCellDef>Dueño</th>
+    <td mat-cell *matCellDef="let census">
+      {{ census.ownerName }}
+    </td>
+  </ng-container>
+  <!-- Email Column -->
+  <!-- Id Number Column -->
+  <ng-container matColumnDef="animalName">
+    <th mat-header-cell *matHeaderCellDef>Mascota</th>
+    <td mat-cell *matCellDef="let census">
+      {{ census.animalName }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="officialName">
+    <th mat-header-cell *matHeaderCellDef>Funcionario</th>
+    <td mat-cell *matCellDef="let census">
+      {{ census.officialName }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="addressLocation">
+    <th mat-header-cell *matHeaderCellDef>Dirección</th>
+    <td mat-cell *matCellDef="let census">{{ census.addressLocation }}</td>
+  </ng-container>
+  <ng-container matColumnDef="date_census">
+    <th mat-header-cell *matHeaderCellDef>Fecha y Hora</th>
+    <td mat-cell *matCellDef="let census">{{ census.date_census }}</td>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Observaciones</th>
+    <td mat-cell *matCellDef="let census">{{ census.description }}</td>
+  </ng-container>
+  <!-- Actions Column -->
+  <!-- <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+    <td mat-cell *matCellDef="let animal">
+      <button mat-icon-button (click)="handleView(animal.id)">
+        <mat-icon>remove_red_eye</mat-icon>
+      </button>
+      <button mat-icon-button (click)="handleEdit(animal.id)">
+        <mat-icon color="primary">edit</mat-icon>
+      </button>
+    </td>
+  </ng-container> -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

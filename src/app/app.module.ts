@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
@@ -39,6 +40,12 @@ import { RaceInfoComponent } from './races/race-info/race-info.component';
 import { SectorsComponent } from './sectors/sectors.component';
 import { FormSectorComponent } from './sectors/form-sector/form-sector.component';
 import { InfoSectorComponent } from './sectors/info-sector/info-sector.component';
+import { AnimalsComponent } from './animals/animals.component';
+import { FormAnimalComponent } from './animals/form-animal/form-animal.component';
+import { InfoAnimalComponent } from './animals/info-animal/info-animal.component';
+import { LocationComponent } from './location/location.component';
+import { CensusComponent } from './census/census.component';
+import { MakeComponent } from './census/make/make.component';
 
 export function playerFactory() {
   return player;
@@ -65,6 +72,12 @@ export function playerFactory() {
     SectorsComponent,
     FormSectorComponent,
     InfoSectorComponent,
+    AnimalsComponent,
+    FormAnimalComponent,
+    InfoAnimalComponent,
+    LocationComponent,
+    CensusComponent,
+    MakeComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +98,7 @@ export function playerFactory() {
     MatNativeDateModule,
     MatDialogModule,
     MatTableModule,
+    MatAutocompleteModule,
   ],
   providers: [interceptortproviders],
   bootstrap: [AppComponent],

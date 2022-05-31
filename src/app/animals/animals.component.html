@@ -1,0 +1,55 @@
+<div class="header">
+  <h1>Animales</h1>
+  <button mat-raised-button color="accent" (click)="handleCreate()">
+    Crear
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<table mat-table [dataSource]="animals" class="mat-elevation-z8">
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let animal">{{ animal.id }}</td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let animal">
+      {{ animal.name }}
+    </td>
+  </ng-container>
+  <!-- Email Column -->
+  <!-- Id Number Column -->
+  <ng-container matColumnDef="owner">
+    <th mat-header-cell *matHeaderCellDef>Dueño</th>
+    <td mat-cell *matCellDef="let animal">
+      {{ animal.owner }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="race">
+    <th mat-header-cell *matHeaderCellDef>Raza</th>
+    <td mat-cell *matCellDef="let animal">
+      {{ animal.race }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="bornDate">
+    <th mat-header-cell *matHeaderCellDef>Fecha de Nacimiento</th>
+    <td mat-cell *matCellDef="let animal">{{ animal.bornDate }}</td>
+  </ng-container>
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+    <td mat-cell *matCellDef="let animal">
+      <button mat-icon-button (click)="handleView(animal.id)">
+        <mat-icon>remove_red_eye</mat-icon>
+      </button>
+      <button mat-icon-button (click)="handleEdit(animal.id)">
+        <mat-icon color="primary">edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

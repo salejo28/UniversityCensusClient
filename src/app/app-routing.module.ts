@@ -19,6 +19,12 @@ import { RaceInfoComponent } from './races/race-info/race-info.component';
 import { SectorsComponent } from './sectors/sectors.component';
 import { FormSectorComponent } from './sectors/form-sector/form-sector.component';
 import { InfoSectorComponent } from './sectors/info-sector/info-sector.component';
+import { AnimalsComponent } from './animals/animals.component';
+import { FormAnimalComponent } from './animals/form-animal/form-animal.component';
+import { InfoAnimalComponent } from './animals/info-animal/info-animal.component';
+import { LocationComponent } from './location/location.component';
+import { CensusComponent } from './census/census.component';
+import { MakeComponent } from './census/make/make.component';
 
 const routes: Routes = [
   {
@@ -171,6 +177,62 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {
       roles: ['admin', 'boss'],
+    },
+  },
+  {
+    path: 'animals',
+    component: AnimalsComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss', 'official'],
+    },
+  },
+  {
+    path: 'animals/create',
+    component: FormAnimalComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss', 'official'],
+    },
+  },
+  {
+    path: 'animals/edit',
+    component: FormAnimalComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss', 'official'],
+    },
+  },
+  {
+    path: 'animals/info',
+    component: InfoAnimalComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'boss', 'official'],
+    },
+  },
+  {
+    path: 'location',
+    component: LocationComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['client'],
+    },
+  },
+  {
+    path: 'census',
+    component: CensusComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['official', 'admin', 'boss'],
+    },
+  },
+  {
+    path: 'census/make',
+    component: MakeComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['official'],
     },
   },
   {

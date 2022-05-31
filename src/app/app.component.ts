@@ -52,6 +52,16 @@ export class AppComponent {
       path: '/sectors',
       icon: 'place',
     },
+    {
+      name: 'Animamles',
+      path: '/animals',
+      icon: 'pets',
+    },
+    {
+      name: 'Censo',
+      path: '/census',
+      icon: 'bar_chart',
+    },
   ];
   constructor(
     private authService: AuthService,
@@ -132,7 +142,7 @@ export class AppComponent {
         localStorage.removeItem('signin');
       },
       complete: () => {
-        this.router.navigate(['/']);
+        location.replace('http://localhost:4200');
       },
     });
   }

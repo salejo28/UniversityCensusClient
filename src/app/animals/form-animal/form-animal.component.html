@@ -1,0 +1,102 @@
+<div class="header">
+  <button mat-button (click)="goBack()">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+    Volver
+  </button>
+  <h1 matCardTitle>{{ edit ? "Editar aninmal" : "Crear Nuevo Animal" }}</h1>
+</div>
+
+<div class="container-form">
+  <form [formGroup]="animalForm" (ngSubmit)="handleSubmit($event)">
+    <div class="content-form">
+      <mat-form-field *ngFor="let field of fields" class="form-register-input">
+        <mat-label>
+          {{ field.label }}
+        </mat-label>
+
+        <!-- Date -->
+        <input
+          formControlName="{{ field.name }}"
+          *ngIf="field.type === 'date'"
+          matInput
+          [matDatepicker]="datepicker"
+        />
+        <mat-datepicker-toggle
+          *ngIf="field.type === 'date'"
+          matSuffix
+          [for]="datepicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #datepicker>
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancelar</button>
+            <button mat-raised-button color="primary" matDatepickerApply>
+              Seleccionar
+            </button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+
+        <!-- Select -->
+        <mat-select
+          *ngIf="field.type === 'select'"
+          formControlName="{{ field.name }}"
+        >
+          <mat-option
+            *ngFor="let option of field.options"
+            value="{{ option.value }}"
+            >{{ option.label }}</mat-option
+          >
+        </mat-select>
+
+        <!-- Autocomplete -->
+        <input
+          type="text"
+          matInput
+          formControlName="{{ field.name }}"
+          [matAutocomplete]="auto"
+          *ngIf="field.type === 'autocomplete'"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of clients" [value]="option.id">
+            {{
+              option.firstName +
+                (" " + option.middleName || "") +
+                (" " + option.surname || "") +
+                (" " + option.lastName || "")
+            }}
+          </mat-option>
+        </mat-autocomplete>
+
+        <input
+          *ngIf="
+            field.type !== 'select' &&
+            field.type !== 'date' &&
+            field.type !== 'autocomplete'
+          "
+          type="{{ field.type }}"
+          matInput
+          formControlName="{{ field.name }}"
+        />
+
+        <mat-error *ngIf="animalForm.get(field.name)?.errors?.['required']">
+          El {{ field.label.toLowerCase() }} es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      class="btn-register"
+      [disabled]="
+          animalForm.get('name')?.value === '' ||
+          animalForm.get('bornDate')?.value === '' ||
+          animalForm.get('name')?.errors?.['required'] || 
+          animalForm.get('bornDate')?.errors?.['required'] ||
+          animalForm.get('race')?.errors?.['required'] ||
+          animalForm.get('owner')?.errors?.['required'] 
+          "
+    >
+      {{ edit ? "Actualizar" : "Guardar" }}
+    </button>
+  </form>
+</div>

@@ -29,6 +29,10 @@ export class UserService {
     this.user.next(user);
   }
 
+  search() {
+    return this.http.get(`${this.endpoint}/user/search/user`, this.options);
+  }
+
   profile() {
     return this.http.get(`${this.endpoint}/user/profile/`, this.options);
   }

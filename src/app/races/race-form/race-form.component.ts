@@ -133,22 +133,30 @@ export class RaceFormComponent implements OnInit {
 
   handleSubmit(event: Event) {
     if (!this.edit) {
-      this.raceService.createRace(this.raceForm.value).subscribe({
-        next: () => {
-          this.handleToast('Raza creada');
-        },
-        error: (err) => {
-          this.handleToast(err.error.error, 'error');
-        },
-        complete: () => {
-          this.goBack();
-        },
-      });
+      this.raceService
+        .createRace({
+          ...this.raceForm.value,
+          dangerous: this.raceForm.value['dangerous'] === 'true',
+        })
+        .subscribe({
+          next: () => {
+            this.handleToast('Raza creada');
+          },
+          error: (err) => {
+            this.handleToast(err.error.error, 'error');
+          },
+          complete: () => {
+            this.goBack();
+          },
+        });
       return;
     }
 
     this.raceService
-      .updateRace(this.id as string, this.raceForm.value)
+      .updateRace(this.id as string, {
+        ...this.raceForm.value,
+        dangerous: this.raceForm.value['dangerous'] === 'true',
+      })
       .subscribe({
         next: () => {
           this.handleToast('Raza actualizada');

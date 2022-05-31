@@ -1,0 +1,58 @@
+<div class="header">
+  <button mat-button (click)="goBack()">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+    Volver
+  </button>
+  <h1 matCardTitle>Crear censo</h1>
+</div>
+
+<div class="container-form">
+  <form [formGroup]="censusForm" (ngSubmit)="handleSubmit($event)">
+    <div class="content-form">
+      <mat-form-field *ngFor="let field of fields" class="form-register-input">
+        <mat-label>
+          {{ field.label }}
+        </mat-label>
+
+        <!-- Select -->
+        <mat-select
+          *ngIf="field.type === 'select'"
+          formControlName="{{ field.name }}"
+        >
+          <mat-option
+            *ngFor="let option of field.options"
+            value="{{ option.value }}"
+            >{{ option.label }}</mat-option
+          >
+        </mat-select>
+
+        <input
+          *ngIf="field.type !== 'select'"
+          type="{{ field.type }}"
+          matInput
+          formControlName="{{ field.name }}"
+        />
+
+        <mat-error *ngIf="censusForm.get(field.name)?.errors?.['required']">
+          El {{ field.label.toLowerCase() }} es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      class="btn-register"
+      [disabled]="
+          censusForm.get('name')?.value === '' ||
+          censusForm.get('specie')?.value === '' ||
+          censusForm.get('name')?.errors?.['required'] || 
+          censusForm.get('specie')?.errors?.['required'] ||
+          censusForm.get('dangerous')?.errors?.['required'] ||
+          censusForm.get('dangerous')?.errors?.['required'] 
+          "
+    >
+      Guardar
+    </button>
+  </form>
+</div>
