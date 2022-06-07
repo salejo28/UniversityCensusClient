@@ -232,7 +232,7 @@ const routes: Routes = [
     component: MakeComponent,
     canActivate: [AuthGuard],
     data: {
-      roles: ['official'],
+      roles: ['official', 'admin'],
     },
   },
   {

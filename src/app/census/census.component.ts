@@ -68,5 +68,7 @@ export class CensusComponent implements OnInit {
     return [year, month, day].join('/');
   }
 
-  handleCreate() {}
+  handleCreate() {
+    this.router.navigate(['/census/make']);
+  }
 }
